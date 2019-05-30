@@ -202,45 +202,53 @@ h1 {
 .blog_post {
     text-align: left;
     background-color: none;
-    outline: 2px solid black;
     height: 300px;
-    padding-top: 10px;
+    padding-top: 6px;
     margin-bottom: 2em;
+    text-align: left;
+    width: 50%;
+    display: block;
+    margin: 1em auto;
+    line-height: 1.4em;
+    //border-left: 1px solid #00000040;
+    //border-radius: 100px;
+
 }
 
-#third_post {
-    float: right;
+.topics-divider {
+    height: 1px;
+    width: 20em;
+    border-bottom: 1px solid #00000040;
+    display: block;
+    margin: 3em auto;
 }
-
 
 .title_and_description {
-    padding: 2em;
+   padding: 1em;
 }
 
-.blog_post_photo {
-    float: left;
+.blog_post_photo img{
+    height: 300px;
     padding-right: 15px;
     padding-left: 15px;
+    float: left;
+    border-radius: 100px;
 }
 
-.expectations {
-    height: 100%;
-    margin: 0px;
-    padding-top: 10px;
-    background-color: none;
-    outline: 2px solid black;
-
+.read-more-button {
+    text-decoration: none;
+    color: rgb(61, 57, 58);
+    float: right;
+    margin-right: 2em;
+    font-size: 1.2em;
+    padding: 8px;
+    border: 1px solid #00000040;
+    border-radius: 100px;
+    &:hover {
+        border: 2px solid black;
+    }
 }
 
-.expected_content {
-    padding: 0 4em;
-    text-align: center;
-
-}
-
-.list_of_expectations-value{
-    line-height: 1.6;
-}
 
 
 //Home Page
@@ -283,4 +291,8 @@ h1 {
     border-bottom: 1px solid #00000040;
     display: block;
     margin: 1em auto;
+}
+
+.home-about-me {
+    line-height: 1.3em;
 }

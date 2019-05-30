@@ -1,2 +1,47 @@
-@media screen and (max-width: 1275px){.nav_bar{padding:5px;text-align:center;position:fixed;display:block;width:100%;background:white;border-bottom:1px rgba(179,179,179,0.72) solid}.nav_bar a{display:none}.nav_bar a.icon{float:right;display:block;margin:0px auto;width:100%;padding-bottom:16px}.header img{display:none}.welcome{padding-top:65px}}@media screen and (max-width: 1275px){.nav_bar.responsive{position:relative}.nav_bar.responsive a{float:none;display:block}}@media screen and (max-width: 768px){.about_the_website{width:95%}#photo_intro_container{height:150px;width:150px}}
+/* When the screen is less than 600 pixels wide, hide all links, except 
+for the first one ("Home"). Show the link that contains should open and 
+close the topnav (.icon) */
+@media screen and (max-width: 1275px) {
+  .nav_bar {
+    padding: 5px;
+    text-align: center;
+    position: fixed;
+    display: block;
+    width: 100%;
+    background: white;
+    border-bottom: 1px rgba(179, 179, 179, 0.72) solid; }
+
+  .nav_bar a {
+    display: none; }
+
+  .nav_bar a.icon {
+    float: right;
+    display: block;
+    margin: 0px auto;
+    width: 100%;
+    padding-bottom: 16px; }
+
+  .header img {
+    display: none; }
+
+  .welcome {
+    padding-top: 65px; } }
+/* The "responsive" class is added to the topnav with JavaScript when the 
+user clicks on the icon. This class makes the topnav look good on small 
+screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 1275px) {
+  .nav_bar.responsive {
+    position: relative; }
+
+  .nav_bar.responsive a {
+    float: none;
+    display: block; } }
+@media screen and (max-width: 768px) {
+  .about_the_website {
+    width: 95%; }
+
+  #photo_intro_container {
+    height: 150px;
+    width: 150px; } }
+
 /*# sourceMappingURL=media.css.map */
