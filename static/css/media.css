@@ -6,6 +6,7 @@ close the topnav (.icon) */
     padding: 5px;
     text-align: center;
     position: fixed;
+    top: 0;
     display: block;
     width: 100%;
     background: white;

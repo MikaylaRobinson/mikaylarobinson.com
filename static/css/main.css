@@ -159,7 +159,6 @@ h1 {
 .blog_post {
   text-align: left;
   background-color: none;
-  height: 300px;
   padding-top: 6px;
   margin-bottom: 2em;
   text-align: left;
@@ -179,7 +178,7 @@ h1 {
   padding: 1em; }
 
 .blog_post_photo img {
-  height: 300px;
+  height: 200px;
   padding-right: 15px;
   padding-left: 15px;
   float: left;
@@ -195,7 +194,7 @@ h1 {
   border: 1px solid #00000040;
   border-radius: 100px; }
   .read-more-button:hover {
-    border: 2px solid black; }
+    border: 1px solid black; }
 
 .welcome {
   height: 500px; }
