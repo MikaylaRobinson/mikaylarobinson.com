@@ -215,7 +215,7 @@ h1 {
     padding-top: 6px;
     margin-bottom: 2em;
     text-align: left;
-    width: 50%;
+    width: 60%;
     display: grid;
     grid-template-columns: 1fr 2fr;
     margin: 1em auto;
@@ -224,10 +224,6 @@ h1 {
     //border-left: 1px solid #00000040;
     //border-radius: 100px;
 
-}
-
-#first_post {
-    height: 200px;
 }
 
 .blog_post .col {
@@ -240,18 +236,16 @@ h1 {
     border-bottom: 1px solid #00000040;
     display: block;
     margin: 1em auto;
-    padding: 1em 0em 3em 0em;
+    padding: 1em 0em 1em 0em;
 }
 
 .title_and_description {
    padding: 1em;
+   padding-bottom: 0;
 }
 
 .blog_post_photo img{
     height: 200px;
-    padding-right: 15px;
-    padding-left: 15px;
-    float: left;
     border-radius: 100px;
     margin-top: 20px
 }
@@ -322,5 +316,15 @@ h1 {
 .columns_of_projects {
     display: grid;
     grid-auto-flow: column;
+}
+
+//Footer
+footer {
+    text-align: center;
+    padding-bottom: 2em;
+}
+
+.fab {
+    padding: 0px 5px;
 }
 

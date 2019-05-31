@@ -26,23 +26,56 @@ close the topnav (.icon) */
     display: none; }
 
   .welcome {
-    padding-top: 65px; } }
-/* The "responsive" class is added to the topnav with JavaScript when the 
-user clicks on the icon. This class makes the topnav look good on small 
-screens (display the links vertically instead of horizontally) */
-@media screen and (max-width: 1275px) {
-  .nav_bar.responsive {
-    position: relative; }
+    padding-top: 65px; }
 
-  .nav_bar.responsive a {
-    float: none;
-    display: block; } }
-@media screen and (max-width: 768px) {
   .about_the_website {
     width: 95%; }
 
   #photo_intro_container {
     height: 150px;
-    width: 150px; } }
+    width: 150px; }
+
+  .nav_bar.responsive {
+    position: relative; }
+
+  .nav_bar.responsive a {
+    float: none;
+    display: block; }
+
+  .blog_post {
+    width: 95%; }
+
+  .blog_post h1 {
+    text-align: center;
+    line-height: 1.3em; }
+
+  .blog_post_photo {
+    text-align: center; }
+
+  .blog_post p {
+    text-align: justify;
+    line-height: 1.2em; }
+
+  .topics-divider:first-of-type {
+    opacity: 0; } }
+@media screen and (max-width: 768px) {
+  .blog_post {
+    display: block; } }
+@media screen and (max-width: 450px) {
+  .blog_post_photo img {
+    width: 100%;
+    height: initial;
+    border-radius: 100px;
+    margin-top: 20px; }
+
+  .blog_post {
+    width: 100%; }
+
+  .title_and_description {
+    padding: 0;
+    padding-top: 1em; }
+
+  .learning_topics {
+    margin: 0 1em; } }
 
 /*# sourceMappingURL=media.css.map */
