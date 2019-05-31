@@ -45,7 +45,9 @@ h1 {
 .header img {
   border-radius: 50px;
   height: 50px;
-  margin-top: 40px; }
+  margin-top: 40px;
+  position: relative;
+  z-index: 101; }
 
 .block-section {
   width: 90%;
@@ -130,8 +132,9 @@ h1 {
 
 .photo_grid-text {
   padding: 1.5em;
-  display: none;
-  cursor: default; }
+  opacity: 0;
+  cursor: default;
+  transition: .5s ease opacity; }
 
 .photo_grid-container {
   width: 100%;
@@ -140,9 +143,10 @@ h1 {
   background-position: 50% 50%; }
   .photo_grid-container:hover .photo_grid-text-wrapper {
     background-color: rgba(0, 0, 0, 0.72);
-    display: block; }
+    display: grid; }
   .photo_grid-container:hover .photo_grid-text {
-    display: inline-block; }
+    display: inherit;
+    opacity: 1; }
 
 #photo_grid-container-1 {
   background-image: url("../img/kitkat.jpg"); }
@@ -152,6 +156,10 @@ h1 {
   background-image: url("../img/graduation.jpg"); }
 #photo_grid-container-4 {
   background-image: url("../img/llama.jpg"); }
+
+.personal_photo_grid {
+  display: grid;
+  grid-auto-flow: column; }
 
 .learning_topics {
   margin: 0 4em 0 4em; }
@@ -165,7 +173,14 @@ h1 {
   width: 50%;
   display: block;
   margin: 1em auto;
-  line-height: 1.4em; }
+  line-height: 1.4em;
+  height: auto; }
+
+#first_post {
+  height: 200px; }
+
+.blog_post .col {
+  display: block; }
 
 .topics-divider {
   height: 1px;
