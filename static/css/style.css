@@ -171,7 +171,8 @@ h1 {
   margin-bottom: 2em;
   text-align: left;
   width: 50%;
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   margin: 1em auto;
   line-height: 1.4em;
   height: auto; }
@@ -187,7 +188,8 @@ h1 {
   width: 20em;
   border-bottom: 1px solid #00000040;
   display: block;
-  margin: 3em auto; }
+  margin: 1em auto;
+  padding: 1em 0em 3em 0em; }
 
 .title_and_description {
   padding: 1em; }
@@ -197,7 +199,8 @@ h1 {
   padding-right: 15px;
   padding-left: 15px;
   float: left;
-  border-radius: 100px; }
+  border-radius: 100px;
+  margin-top: 20px; }
 
 .read-more-button {
   text-decoration: none;
@@ -250,6 +253,10 @@ h1 {
 
 .home-about-me {
   line-height: 1.3em; }
+
+.columns_of_projects {
+  display: grid;
+  grid-auto-flow: column; }
 
 /* When the screen is less than 600 pixels wide, hide all links, except 
 for the first one ("Home"). Show the link that contains should open and 

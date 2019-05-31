@@ -197,9 +197,6 @@ h1 {
         }
     }
 
-.photo_grid-col {
-    //grid-auto-flow: column;
-}
 
 .personal_photo_grid {
     display: grid;
@@ -219,7 +216,8 @@ h1 {
     margin-bottom: 2em;
     text-align: left;
     width: 50%;
-    display: block;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     margin: 1em auto;
     line-height: 1.4em;
     height: auto;
@@ -241,7 +239,8 @@ h1 {
     width: 20em;
     border-bottom: 1px solid #00000040;
     display: block;
-    margin: 3em auto;
+    margin: 1em auto;
+    padding: 1em 0em 3em 0em;
 }
 
 .title_and_description {
@@ -254,6 +253,7 @@ h1 {
     padding-left: 15px;
     float: left;
     border-radius: 100px;
+    margin-top: 20px
 }
 
 .read-more-button {
@@ -317,3 +317,10 @@ h1 {
 .home-about-me {
     line-height: 1.3em;
 }
+
+// Side Projects Page
+.columns_of_projects {
+    display: grid;
+    grid-auto-flow: column;
+}
+
