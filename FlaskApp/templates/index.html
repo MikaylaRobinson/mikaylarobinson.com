@@ -1,3 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="welcome">
+    <div class="about_the_website">
+        <div class="introduction_photo" id="photo_intro_container">
+        </div>
+        <div class="home-about-me">
+            <p>Hi, I'm Mikayla!</p>
+            <div class="paragraph-divider"></div>
+            <p>Welcome to my website! Follow along as I explore topics in data science and technology. This blog
+                will highlight my personal side projects as well as include informational posts about new topics.
+                As I tackle new topics, my posts will demonstrate my learning process to serve as a studying
+                tool for myself and hopefully for others that want to make the jump into learning about this field.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+
+
+
+<!-------
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,12 +34,12 @@
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../static/css/style.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/Grid.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="../static/js/main.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+HK|Open+Sans|Raleway&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis:300|Lato:300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+    crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -24,10 +51,10 @@
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <div class="fa fa-bars nav-bar-menu-icon"></div>
         </a>
-        <a class="nav_bar-link" href="index.html">Home</a>
-        <a class="nav_bar-link" href="topics.html">Learning Topics</a>
-        <a class="nav_bar-link" href="projects.html">Side Projects</a>
-        <a class="nav_bar-link" href="about.html">About Me</a>
+        <a class="nav_bar-link" href="/">Home</a>
+        <a class="nav_bar-link" href="/learning_topics">Learning Topics</a>
+        <a class="nav_bar-link" href="/side_projects">Side Projects</a>
+        <a class="nav_bar-link" href="/about_me">About Me</a>
     </div>
     <section class="welcome">
         <div class="about_the_website">
@@ -44,6 +71,20 @@
             </div>
         </div>
     </section>
+    <section class="footer">
+        <footer>
+            <div class="icon-links">
+                <a class="contact-link" href="https://github.com/MikaylaRobinson" target="_blank">
+                    <i class="fab fa-github-square fa-2x"></i>
+                </a>
+                <a class="contact-link" href="https://www.linkedin.com/in/mikaylamrobinson/">
+                    <i class="fab fa-linkedin fa-2x"></i>
+                </a>
+            </div>
+        </footer>
+
+    </section>
 </body>
 
 </html>
+------>

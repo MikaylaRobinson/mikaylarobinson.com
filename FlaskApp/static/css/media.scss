@@ -36,7 +36,7 @@ close the topnav (.icon) */
     padding-top: 65px;
   }
 
-  .about_the_website {
+  .welcome {
     width: 95%;
   }
   #photo_intro_container {
@@ -75,11 +75,38 @@ close the topnav (.icon) */
     opacity: 0;
   }
 
+  .columns_of_projects {
+    display: block;
+  }
+
+  .project-col {
+    border-width: 20em;
+    border-bottom: 1px solid #00000040;
+    width: 95%;
+    
+  }
+
+  .project-col:not(:last-child) {
+    border-right: none;
+  }
+
+  .personal_photo_grid {
+    display: block;
+  }
+
+  .photo_grid-text-wrapper {
+  }
+
+
 }
 
 @media screen and (max-width: $tablet-width) {
   .blog_post {
     display: block;
+  }
+
+  .welcome {
+    width: 75%;
   }
 }
 

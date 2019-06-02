@@ -28,7 +28,7 @@ close the topnav (.icon) */
   .welcome {
     padding-top: 65px; }
 
-  .about_the_website {
+  .welcome {
     width: 95%; }
 
   #photo_intro_container {
@@ -57,10 +57,27 @@ close the topnav (.icon) */
     line-height: 1.2em; }
 
   .topics-divider:first-of-type {
-    opacity: 0; } }
+    opacity: 0; }
+
+  .columns_of_projects {
+    display: block; }
+
+  .project-col {
+    border-width: 20em;
+    border-bottom: 1px solid #00000040;
+    width: 95%; }
+
+  .project-col:not(:last-child) {
+    border-right: none; }
+
+  .personal_photo_grid {
+    display: block; } }
 @media screen and (max-width: 768px) {
   .blog_post {
-    display: block; } }
+    display: block; }
+
+  .welcome {
+    width: 75%; } }
 @media screen and (max-width: 450px) {
   .blog_post_photo img {
     width: 100%;
