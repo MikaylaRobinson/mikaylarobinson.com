@@ -17,7 +17,5 @@ def topics_page():
 def projects_page():
     return render_template("projects.html")
 
-
-
 if __name__ == "__main__":
     app.run()
