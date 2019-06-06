@@ -164,38 +164,13 @@ h1 {
 }
 
 .photo_grid-container {
-    width: 100%;
-    height: 500px;
-    background-size: cover;
-    background-position: 50% 50%;
-    &:hover {
-        .photo_grid-text-wrapper {
-            background-color: $outline-color;
-            display: grid;
-        }
-        .photo_grid-text {
-            display: inherit; 
-            opacity: 1;
-        }
+    // width: 100%;
+    // height: 500px;
+    // background-size: cover;
+    // background-position: 50% 50%;
 
-    }
 }
 
-
-#photo_grid-container {
-    &-1 {
-        background-image: url("../img/kitkat.jpg");
-        }
-    &-2 {
-        background-image: url("../img/lillee.jpg");
-        }
-    &-3 {
-        background-image: url("../img/graduation.jpg");
-        }
-    &-4 {
-        background-image: url("../img/llama.jpg");
-        }
-    }
 
 
 .personal_photo_grid {

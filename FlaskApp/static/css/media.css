@@ -71,7 +71,55 @@ close the topnav (.icon) */
     border-right: none; }
 
   .personal_photo_grid {
-    display: block; } }
+    display: block; }
+
+  .responsive_photo-div {
+    display: block;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%; }
+
+  #responsive_photo-div-1 {
+    background-image: url("../img/kitkat.jpg"); }
+  #responsive_photo-div-2 {
+    background-image: url("../img/lillee.jpg"); }
+  #responsive_photo-div-3 {
+    background-image: url("../img/graduation.jpg"); }
+  #responsive_photo-div-4 {
+    background-image: url("../img/llama.jpg"); }
+
+  .photo_grid-container {
+    background: none; }
+
+  .photo_grid-text {
+    opacity: 1;
+    color: black;
+    font-size: 1.2em; } }
+@media screen and (min-width: 1275px) {
+  .photo_grid-container {
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    background-position: 50% 50%; }
+    .photo_grid-container:hover .photo_grid-text-wrapper {
+      background-color: rgba(0, 0, 0, 0.72);
+      display: grid; }
+    .photo_grid-container:hover .photo_grid-text {
+      display: inherit;
+      opacity: 1; }
+
+  .responsive_photo-div {
+    display: none; }
+
+  #photo_grid-container-1 {
+    background-image: url("../img/kitkat.jpg"); }
+  #photo_grid-container-2 {
+    background-image: url("../img/lillee.jpg"); }
+  #photo_grid-container-3 {
+    background-image: url("../img/graduation.jpg"); }
+  #photo_grid-container-4 {
+    background-image: url("../img/llama.jpg"); } }
 @media screen and (max-width: 768px) {
   .blog_post {
     display: block; }
