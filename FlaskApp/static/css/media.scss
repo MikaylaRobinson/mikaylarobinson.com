@@ -158,7 +158,13 @@ close the topnav (.icon) */
 	}
 	.welcome {
 		width: 75%;
-  }
+	}
+	.about_me-text-box {
+		width: 70%;
+		margin: 0px auto;
+		text-align: center;
+	}
+
 }
 
 
@@ -187,5 +193,11 @@ close the topnav (.icon) */
 	
 	.topics-divider {
 		width: 50%;
+	}
+
+	.about_me-text-box {
+		width: 90%;
+		margin: 0px auto;
+		text-align: center;
 	}
 }

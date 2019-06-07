@@ -381,7 +381,12 @@ close the topnav (.icon) */
     display: block; }
 
   .welcome {
-    width: 75%; } }
+    width: 75%; }
+
+  .about_me-text-box {
+    width: 70%;
+    margin: 0px auto;
+    text-align: center; } }
 @media screen and (max-width: 450px) {
   .blog_post_photo img {
     width: 100%;
@@ -404,6 +409,11 @@ close the topnav (.icon) */
     text-align: center; }
 
   .topics-divider {
-    width: 50%; } }
+    width: 50%; }
+
+  .about_me-text-box {
+    width: 90%;
+    margin: 0px auto;
+    text-align: center; } }
 
 /*# sourceMappingURL=style.css.map */
