@@ -113,6 +113,10 @@ close the topnav (.icon) */
   color: black;
   font-size: 1.2em;
 }
+.columns_of_projects {
+	padding-top: 10px;
+}
+
 }
 
 @media screen and (min-width: $navbar-break) {
@@ -168,6 +172,8 @@ close the topnav (.icon) */
 	.project_post {
 		text-align: center;
 	}
+
+
 }
 
 @media screen and (max-width: $phone-width) {
