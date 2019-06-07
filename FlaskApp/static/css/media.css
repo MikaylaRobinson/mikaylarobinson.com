@@ -131,7 +131,8 @@ close the topnav (.icon) */
     width: 100%;
     height: initial;
     border-radius: 100px;
-    margin-top: 20px; }
+    margin-top: 20px;
+    max-width: 100px; }
 
   .blog_post {
     width: 100%; }
@@ -141,6 +142,12 @@ close the topnav (.icon) */
     padding-top: 1em; }
 
   .learning_topics {
-    margin: 0 1em; } }
+    margin: 0 1em; }
+
+  .title_and_description p {
+    text-align: center; }
+
+  .topics-divider {
+    width: 50%; } }
 
 /*# sourceMappingURL=media.css.map */
