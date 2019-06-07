@@ -24,10 +24,10 @@
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <div class="fa fa-bars nav-bar-menu-icon"></div>
         </a>
-        <a class="nav_bar-link" href="/">Home</a>
-        <a class="nav_bar-link" href="/learning_topics">Learning Topics</a>
-        <a class="nav_bar-link" href="/side_projects">Side Projects</a>
-        <a class="nav_bar-link" href="/about_me">About Me</a>
+        <a class="nav_bar-link{% if request.path == "/" %} nav_bar-link-active{% endif %}" href="/">Home</a>
+        <a class="nav_bar-link{% if request.path == "/learning_topics" %} nav_bar-link-active{% endif %}" href="/learning_topics">Learning Topics</a>
+        <a class="nav_bar-link{% if request.path == "/side_projects" %} nav_bar-link-active{% endif %}" href="/side_projects">Side Projects</a>
+        <a class="nav_bar-link{% if request.path == "/about_me" %} nav_bar-link-active{% endif %}" href="/about_me">About Me</a>
     </div>
 
     {% block content %}{% endblock %}
