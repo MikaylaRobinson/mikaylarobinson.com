@@ -213,7 +213,9 @@ h1 {
 
 .blog_post_photo img{
     height: 200px;
-    margin-top: 20px
+    margin-top: 20px;
+    margin: 0px auto;
+    display: block;
 }
 
 .read-more-button {
