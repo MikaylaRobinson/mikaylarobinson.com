@@ -1,4 +1,4 @@
-import dotenv
+import config
 import os
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import current_user, login_user, LoginManager, UserMixin, logout_user, login_required
@@ -11,9 +11,9 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 app = Flask(__name__)
 
-dotenv.load_dotenv(os.path.dirname(__file__), ".flaskenv")
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("SQLALCHEMY_DATABASE_URI")
-app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+# dotenv.load_dotenv(os.path.dirname(__file__), ".flaskenv")
+app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
+app.config["SECRET_KEY"] = config.SECRET_KEY
 
 # Database configuration with SQLAlchemy
 db = SQLAlchemy(app)
@@ -105,7 +105,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Sign In")
 
 
-if os.environ.get("CREATE_DATABASE"):
+if config.CREATE_DATABASE:
     print("Creating database")
     db.create_all()
 
@@ -132,7 +132,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         # Use secret password to prevent unwanted registrations
-        if form.secret_pass != os.environ.get("SECRET_PASSWORD"):
+        if form.secret_pass.data != config.SECRET_PASSWORD:
             flash("I don't think you should be doing this.")
             return redirect(url_for("home_page"))
             
@@ -172,14 +172,19 @@ def log_user_in():
 def control_panel_route():
     return render_template("control_panel.html")
 
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+@app.route("/admin/blog/new")
+@login_required
+def admin_blog_new_route():
+    return render_template("admin_pages/blog_new.html")
 
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('home_page'))
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 if __name__ == "__main__":
     app.run()
