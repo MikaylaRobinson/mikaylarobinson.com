@@ -59,6 +59,7 @@ class SideProjects(db.Model):
         self.content = content
         self.image_url = image_url
 
+# Borrowed from: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-v-user-logins
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -152,12 +153,16 @@ def log_user_in():
     if current_user.is_authenticated:
         flash("Logged in")
         return redirect(url_for('home_page'))
+
     form = LoginForm()
     if form.validate_on_submit():
+        # Retrieve user by username
         user = User.query.filter_by(username=form.username.data).first()
+        # Early exit if user doesn't exist in DB, or password check fails
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
+
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('home_page'))
     return render_template('login.html', title='Sign In', form=form)
