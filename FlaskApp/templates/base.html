@@ -30,6 +30,16 @@
         <a class="nav_bar-link{% if request.path == "/about_me" %} nav_bar-link-active{% endif %}" href="/about_me">About Me</a>
     </div>
 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+        <div style="font-size:11em;color:red">{{ message }}</div>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+
     {% block content %}{% endblock %}
 
     <section class="footer">
