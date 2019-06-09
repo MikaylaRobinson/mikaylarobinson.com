@@ -1,1 +1,3 @@
 .flaskenv
+config.py
+FlaskApp-env/
