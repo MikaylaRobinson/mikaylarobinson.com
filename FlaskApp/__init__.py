@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from sqlalchemy.sql import func
 from werkzeug.security import generate_password_hash, check_password_hash
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 app = Flask(__name__)
@@ -104,6 +104,13 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField("Remember Me")
     submit = SubmitField("Sign In")
 
+class NewBlogForm(FlaskForm):
+    keyword = StringField("Keyword", validators=[DataRequired()])
+    title = StringField("Title", validators=[DataRequired()])
+    tools_used = StringField("Tools Used", validators=[DataRequired()])
+    content = TextAreaField("Content", validators=[DataRequired()])
+    submit = SubmitField("Register")
+
 
 if config.CREATE_DATABASE:
     print("Creating database")
@@ -172,10 +179,11 @@ def log_user_in():
 def control_panel_route():
     return render_template("control_panel.html")
 
-@app.route("/admin/blog/new")
+@app.route("/admin/blog/new", methods=['GET', 'POST'])
 @login_required
 def admin_blog_new_route():
-    return render_template("admin_pages/blog_new.html")
+    form = NewBlogForm()
+    return render_template("admin_pages/blog_new.html",form=form)
 
 @app.route('/logout')
 def logout():
