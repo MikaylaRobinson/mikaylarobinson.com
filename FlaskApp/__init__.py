@@ -1,7 +1,7 @@
 import dotenv
 import os
 from flask import Flask, render_template, redirect, url_for, flash
-from flask_login import current_user, login_user, LoginManager, UserMixin, logout_user
+from flask_login import current_user, login_user, LoginManager, UserMixin, logout_user, login_required
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from sqlalchemy.sql import func
@@ -161,6 +161,11 @@ def log_user_in():
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('home_page'))
     return render_template('login.html', title='Sign In', form=form)
+
+@app.route("/control_panel")
+@login_required
+def control_panel_route():
+    return render_template("control_panel.html")
 
 @login.user_loader
 def load_user(id):

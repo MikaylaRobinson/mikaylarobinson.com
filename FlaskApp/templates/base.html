@@ -30,6 +30,7 @@
         <a class="nav_bar-link{% if request.path == "/about_me" %} nav_bar-link-active{% endif %}" href="/about_me">About Me</a>
 
         {% if current_user.is_authenticated %}
+        <a class="nav_bar-link" href="/control_panel">Control Panel</a>
         <a class="nav_bar-link" href="/logout">Log Out</a>
         {% endif %}
     </div>
