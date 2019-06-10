@@ -1,4 +1,5 @@
 import config
+import json
 import os
 from datetime import datetime
 from flask import Flask, render_template, redirect, url_for, flash
@@ -40,6 +41,9 @@ class LearningTopics(db.Model):
         self.url_slug = url_slug
         self.content = content
         self.image_url = image_url
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns if not "date"}
 
 class SideProjects(db.Model):
     __tablename__ = "side_projects"
@@ -194,6 +198,17 @@ def admin_blog_new_route():
         flash("Post Added")
         return redirect(url_for("control_panel_route"))
     return render_template("admin_pages/blog_new.html",form=form)
+
+@app.route("/admin/blog/view_all")
+@login_required
+def admin_blog_view_all():
+    posts = LearningTopics.query.all()
+    return render_template("admin_pages/blog_view_all.html", posts=posts)
+
+@app.route("/api/blog/posts")
+def api_blog_posts_route():
+    posts = LearningTopics.query.all()
+    return json.dumps([post.as_dict() for post in posts])
 
 @app.route('/logout')
 def logout():
