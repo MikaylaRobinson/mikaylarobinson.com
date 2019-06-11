@@ -1,9 +1,12 @@
 import config
+import json
 import os
+from datetime import datetime
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import current_user, login_user, LoginManager, UserMixin, logout_user, login_required
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
+from site_utils import make_url_slug
 from sqlalchemy.sql import func
 from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
@@ -22,7 +25,7 @@ login = LoginManager(app)
 class LearningTopics(db.Model):
     __tablename__ = "learning_topics"
     id = db.Column(db.Integer, primary_key = True)
-    date = db.Column(db.Date, unique = True)
+    date = db.Column(db.DateTime)
     keyword = db.Column(db.String(120))
     title = db.Column(db.String(250))
     tools_used = db.Column(db.String(120))
@@ -38,6 +41,9 @@ class LearningTopics(db.Model):
         self.url_slug = url_slug
         self.content = content
         self.image_url = image_url
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns if not "date"}
 
 class SideProjects(db.Model):
     __tablename__ = "side_projects"
@@ -183,7 +189,26 @@ def control_panel_route():
 @login_required
 def admin_blog_new_route():
     form = NewBlogForm()
+    
+    if form.validate_on_submit():
+        url_slug = make_url_slug(form.title.data)
+        post = LearningTopics(date=datetime.now(), keyword=form.keyword.data, title=form.title.data , tools_used=form.tools_used.data, url_slug=url_slug, content=form.content.data, image_url=None)
+        db.session.add(post)
+        db.session.commit()
+        flash("Post Added")
+        return redirect(url_for("control_panel_route"))
     return render_template("admin_pages/blog_new.html",form=form)
+
+@app.route("/admin/blog/view_all")
+@login_required
+def admin_blog_view_all():
+    posts = LearningTopics.query.all()
+    return render_template("admin_pages/blog_view_all.html", posts=posts)
+
+@app.route("/api/blog/posts")
+def api_blog_posts_route():
+    posts = LearningTopics.query.all()
+    return json.dumps([post.as_dict() for post in posts])
 
 @app.route('/logout')
 def logout():
