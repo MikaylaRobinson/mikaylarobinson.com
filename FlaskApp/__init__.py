@@ -174,7 +174,7 @@ def log_user_in():
         # Early exit if user doesn't exist in DB, or password check fails
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
-            return redirect(url_for('login'))
+            return redirect(url_for('log_user_in'))
 
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('home_page'))
