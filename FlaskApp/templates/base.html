@@ -9,6 +9,14 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/static/css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/static/js/main.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132318681-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-132318681-2');
+    </script>
     <link href="https://fonts.googleapis.com/css?family=Dosis:300|Lato:300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
@@ -25,9 +33,12 @@
             <div class="fa fa-bars nav-bar-menu-icon"></div>
         </a>
         <a class="nav_bar-link{% if request.path == "/" %} nav_bar-link-active{% endif %}" href="/">Home</a>
-        <a class="nav_bar-link{% if request.path == "/learning_topics" %} nav_bar-link-active{% endif %}" href="/learning_topics">Learning Topics</a>
-        <a class="nav_bar-link{% if request.path == "/side_projects" %} nav_bar-link-active{% endif %}" href="/side_projects">Side Projects</a>
-        <a class="nav_bar-link{% if request.path == "/about_me" %} nav_bar-link-active{% endif %}" href="/about_me">About Me</a>
+        <a class="nav_bar-link{% if request.path == "/learning_topics" %} nav_bar-link-active{% endif %}" href="/learning_topics">Learning
+            Topics</a>
+        <a class="nav_bar-link{% if request.path == "/side_projects" %} nav_bar-link-active{% endif %}" href="/side_projects">Side
+            Projects</a>
+        <a class="nav_bar-link{% if request.path == "/about_me" %} nav_bar-link-active{% endif %}" href="/about_me">About
+            Me</a>
 
         {% if current_user.is_authenticated %}
         <a class="nav_bar-link" href="/control_panel">Control Panel</a>
@@ -37,9 +48,9 @@
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-        {% for message in messages %}
-        <div style="font-size:11em;color:red">{{ message }}</div>
-        {% endfor %}
+    {% for message in messages %}
+    <div style="font-size:11em;color:red">{{ message }}</div>
+    {% endfor %}
     {% endif %}
     {% endwith %}
 
