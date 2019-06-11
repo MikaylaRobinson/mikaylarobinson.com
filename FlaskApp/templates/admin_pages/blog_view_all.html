@@ -2,16 +2,30 @@
 
 {% block content %}
 <div class="width-80-center">
-{% for post in posts %}
-<div>
-    <h4>{{post.title}}</h4>
-    <p>Keywords: {{post.keyword}}</p>
-    <p>Date: {{post.date}}</p>
-    <p>Tools used: {{post.tools_used}}</p>
-    <p>URL Slug: {{post.url_slug}}</p>
-    <p>Content: {{post.content|safe}}</p>
-</div>
+    {% for post in posts %}
+    <div>
+        <h4>{{post.title}}</h4>
+        <p>Id: {{post.id}}</p>
+        <p>Keywords: {{post.keyword}}</p>
+        <p>Date: {{post.date}}</p>
+        <p>Tools used: {{post.tools_used}}</p>
+        <p>URL Slug: {{post.url_slug}}</p>
+        <p>Content: {{post.content|safe}}</p>
+        <p><a class="delete-post" href="/admin/blog/delete/{{post.id}}">Delete Post</a></p>
+    </div>
+    {% endfor %}
 
-{% endfor %}
+    <script>
+        $(".delete-post").click(function (event) {
+            event.preventDefault();
+
+            var $post_element = $(this);
+            var post_link = $(this).attr("href");
+
+            $.post(post_link, function (data) {
+                $post_element.parent().parent().hide();
+            });
+        });
+    </script>
 </div>
 {% endblock %}
