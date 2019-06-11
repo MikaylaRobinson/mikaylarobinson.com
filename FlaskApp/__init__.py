@@ -210,6 +210,18 @@ def api_blog_posts_route():
     posts = LearningTopics.query.all()
     return json.dumps([post.as_dict() for post in posts])
 
+@app.route('/admin/blog/delete/<id>', methods=['POST'])
+@login_required
+def delete_blog_post_route(id):
+    post = LearningTopics.query.filter_by(id=id).first()
+    
+    if post is None:
+        return json.dumps({"error":"Post does not exist"})
+
+    db.session.delete(post)
+    db.session.commit()
+    return json.dumps({"status":"ok"})
+
 @app.route('/logout')
 def logout():
     logout_user()
