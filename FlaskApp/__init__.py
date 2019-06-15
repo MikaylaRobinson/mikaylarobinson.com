@@ -5,12 +5,10 @@ from datetime import datetime
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import current_user, login_user, LoginManager, UserMixin, logout_user, login_required
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import FlaskForm
 from site_utils import make_url_slug
 from sqlalchemy.sql import func
 from werkzeug.security import generate_password_hash, check_password_hash
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
+from forms import RegistrationForm, LoginForm, NewBlogForm, NewSideProjectForm
 
 app = Flask(__name__)
 
@@ -84,45 +82,6 @@ class User(UserMixin, db.Model):
 
     def set_is_admin(self, is_admin):
         self.is_admin = is_admin
-
-class RegistrationForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired()])
-    email = StringField("Email", validators=[DataRequired(), Email()])
-    password = PasswordField("Password", validators=[DataRequired()])
-    password2 = PasswordField(
-        "Repeat Password", validators=[DataRequired(), EqualTo("password")])
-    secret_pass = PasswordField("Entry Code", validators=[DataRequired()])
-    submit = SubmitField("Register")
-
-    def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
-        if user is not None:
-            raise ValidationError("Please use a different username.")
-
-    def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
-        if user is not None:
-            raise ValidationError("Please use a different email address.")
-
-class LoginForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired()])
-    password = PasswordField("Password", validators=[DataRequired()])
-    remember_me = BooleanField("Remember Me")
-    submit = SubmitField("Sign In")
-
-class NewBlogForm(FlaskForm):
-    keyword = StringField("Keyword", validators=[DataRequired()])
-    title = StringField("Title", validators=[DataRequired()])
-    tools_used = StringField("Tools Used", validators=[DataRequired()])
-    content = TextAreaField("Content", validators=[DataRequired()])
-    submit = SubmitField("Register")
-
-class NewSideProjectForm(FlaskForm):
-    keyword = StringField("Keyword", validators=[DataRequired()])
-    title = StringField("Title", validators=[DataRequired()])
-    tools_used = StringField("Tools Used", validators=[DataRequired()])
-    content = TextAreaField("Content", validators=[DataRequired()])
-    submit = SubmitField("Register")
 
 if config.CREATE_DATABASE:
     print("Creating database")
