@@ -163,7 +163,7 @@ def log_user_in():
 @app.route("/control_panel")
 @login_required
 def control_panel_route():
-    return render_template("control_panel.html")
+    return render_template("admin_pages/control_panel.html")
 
 @app.route("/admin/blog/new", methods=['GET', 'POST'])
 @login_required
@@ -243,7 +243,14 @@ def upload_file():
         file_url = photos.url(filename)
     else:
         file_url = None
-    return render_template('upload.html', form=form, file_url=file_url)
+    return render_template('admin_pages/upload.html', form=form, file_url=file_url)
+
+@app.route("/admin/view_images")
+@login_required
+def admin_view_images():
+    all_images = os.listdir(app.config['UPLOADED_PHOTOS_DEST'])
+    all_images = ['uploads/' + file for file in all_images]
+    return render_template("admin_pages/images_view.html", all_images=all_images)
 
 @app.route('/logout')
 def logout():

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="width-80-center">
+        {% for image in all_images %}
+        <img src="{{url_for('static', filename=image)}}" alt="{{image}}" style="height: 100px;">
+        <p>{{url_for('static', filename=image)}}</p>
+        {% endfor %}
+</div>
+
+{% endblock %}
