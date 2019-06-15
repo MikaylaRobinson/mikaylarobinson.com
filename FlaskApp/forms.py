@@ -31,7 +31,7 @@ class NewBlogForm(FlaskForm):
     keyword = StringField("Keyword", validators=[DataRequired()])
     title = StringField("Title", validators=[DataRequired()])
     tools_used = StringField("Tools Used", validators=[DataRequired()])
-    content = TextAreaField("Content", validators=[DataRequired()])
+    content = TextAreaField("Content")
     submit = SubmitField("Register")
 
 class NewSideProjectForm(FlaskForm):
