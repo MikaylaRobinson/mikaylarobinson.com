@@ -48,20 +48,20 @@ class LearningTopics(db.Model):
 class SideProjects(db.Model):
     __tablename__ = "side_projects"
     id = db.Column(db.Integer, primary_key = True)
-    date = db.Column(db.Date, unique = True)
+    date = db.Column(db.DateTime)
     keyword = db.Column(db.String(120))
     title = db.Column(db.String(120))
     tools_used = db.Column(db.String(120))
-    project_url = db.Column(db.String(120))
+    url_slug = db.Column(db.String(120))
     content = db. Column(db.String())
     image_url = db.Column(db.String(250))
 
-    def __init__(self, date, keyword, title, tools_used, project_url, content, image_url):
+    def __init__(self, date, keyword, title, tools_used, url_slug, content, image_url):
         self.date = date
         self.keyword = keyword
         self.title = title
         self.tools_used = tools_used
-        self.project_url = project_url
+        self.url_slug = url_slug
         self.content = content
         self.image_url = image_url
 
@@ -111,6 +111,13 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Sign In")
 
 class NewBlogForm(FlaskForm):
+    keyword = StringField("Keyword", validators=[DataRequired()])
+    title = StringField("Title", validators=[DataRequired()])
+    tools_used = StringField("Tools Used", validators=[DataRequired()])
+    content = TextAreaField("Content", validators=[DataRequired()])
+    submit = SubmitField("Register")
+
+class NewSideProjectForm(FlaskForm):
     keyword = StringField("Keyword", validators=[DataRequired()])
     title = StringField("Title", validators=[DataRequired()])
     tools_used = StringField("Tools Used", validators=[DataRequired()])
@@ -199,11 +206,31 @@ def admin_blog_new_route():
         return redirect(url_for("control_panel_route"))
     return render_template("admin_pages/blog_new.html",form=form)
 
+@app.route("/admin/project/new", methods=['GET', 'POST'])
+@login_required
+def admin_project_new_route():
+    form = NewSideProjectForm()
+    
+    if form.validate_on_submit():
+        url_slug = make_url_slug(form.title.data)
+        post = SideProjects(date=datetime.now(), keyword=form.keyword.data, title=form.title.data , tools_used=form.tools_used.data, url_slug=url_slug, content=form.content.data, image_url=None)
+        db.session.add(post)
+        db.session.commit()
+        flash("Post Added")
+        return redirect(url_for("control_panel_route"))
+    return render_template("admin_pages/project_new.html",form=form)
+
 @app.route("/admin/blog/view_all")
 @login_required
 def admin_blog_view_all():
     posts = LearningTopics.query.all()
     return render_template("admin_pages/blog_view_all.html", posts=posts)
+
+@app.route("/admin/project/view_all")
+@login_required
+def admin_project_view_all():
+    posts = SideProjects.query.all()
+    return render_template("admin_pages/project_view_all.html", posts=posts)
 
 @app.route("/api/blog/posts")
 def api_blog_posts_route():
@@ -214,6 +241,18 @@ def api_blog_posts_route():
 @login_required
 def delete_blog_post_route(id):
     post = LearningTopics.query.filter_by(id=id).first()
+    
+    if post is None:
+        return json.dumps({"error":"Post does not exist"})
+
+    db.session.delete(post)
+    db.session.commit()
+    return json.dumps({"status":"ok"})
+
+@app.route('/admin/project/delete/<id>', methods=['POST'])
+@login_required
+def delete_project_post_route(id):
+    post = SideProjects.query.filter_by(id=id).first()
     
     if post is None:
         return json.dumps({"error":"Post does not exist"})

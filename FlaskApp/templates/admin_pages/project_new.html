@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="width-80-center">
+    <h1>New Side Project Post</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.title.label }}<br>
+            {{ form.title(size=32) }}<br>
+            {% for error in form.title.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.keyword.label }}<br>
+            {{ form.keyword(size=32) }}<br>
+            {% for error in form.keyword.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.tools_used.label }}<br>
+            {{ form.tools_used(size=32) }}<br>
+            {% for error in form.tools_used.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.content.label }}<br>
+            {{ form.content(size=32) }}<br>
+            {% for error in form.content.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+{% endblock %}
