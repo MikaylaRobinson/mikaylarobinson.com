@@ -1,17 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Control Panel</h1>
-<li>
-    <a href="/admin/blog/new">New Blog Post</a>
-</li>
-<li>
-    <a href="/admin/blog/view_all">View all Blog Database Table rows</a>
-</li>
-<li>
-    <a href="/admin/project/new">New Side Project Post</a>
-</li>
-<li>
-    <a href="/admin/project/view_all">View all Side Project Database Table rows</a>
-</li>
+<div class="width-80-center">
+    <h1>Control Panel</h1>
+
+    <h2>Blog</h2>
+    <li>
+        <a href="/admin/blog/new">New Blog Post</a>
+    </li>
+    <li>
+        <a href="/admin/blog/view_all">View all Blog Database Table rows</a>
+    </li>
+
+    <h2>Side Projects</h2>
+    <li>
+        <a href="/admin/project/new">New Side Project Post</a>
+    </li>
+    <li>
+        <a href="/admin/project/view_all">View all Side Project Database Table rows</a>
+    </li>
+
+    <h2>Image upload</h2>
+    <li>
+        <a href="/admin/image_upload">Image Upload</a>
+    </li>
+</div>
 {% endblock %}

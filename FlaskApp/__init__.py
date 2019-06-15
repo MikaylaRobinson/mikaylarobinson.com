@@ -5,6 +5,8 @@ from datetime import datetime
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import current_user, login_user, LoginManager, UserMixin, logout_user, login_required
 from flask_sqlalchemy import SQLAlchemy
+from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
+from flask_wtf import FlaskForm
 from site_utils import make_url_slug
 from sqlalchemy.sql import func
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -15,10 +17,23 @@ app = Flask(__name__)
 # dotenv.load_dotenv(os.path.dirname(__file__), ".flaskenv")
 app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
 app.config["SECRET_KEY"] = config.SECRET_KEY
+app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(os.getcwd(), 'static', 'uploads')
 
 # Database configuration with SQLAlchemy
 db = SQLAlchemy(app)
 login = LoginManager(app)
+
+# Image upload form, needs app variable. 
+# TODO: Refactor file structure
+from flask_wtf.file import FileField, FileRequired, FileAllowed
+from wtforms import SubmitField
+photos = UploadSet('photos', IMAGES)
+configure_uploads(app, photos)
+patch_request_class(app)  # set maximum file size, default is 16MB
+
+class ImageUploadForm(FlaskForm):
+    photo = FileField(validators=[FileAllowed(photos, u'Image only!'), FileRequired(u'File was empty!')])
+    submit = SubmitField(u'Upload')
 
 class LearningTopics(db.Model):
     __tablename__ = "learning_topics"
@@ -218,6 +233,17 @@ def delete_project_post_route(id):
     db.session.delete(post)
     db.session.commit()
     return json.dumps({"status":"ok"})
+
+@app.route('/admin/image_upload', methods=['GET', 'POST'])
+@login_required
+def upload_file():
+    form = ImageUploadForm()
+    if form.validate_on_submit():
+        filename = photos.save(form.photo.data)
+        file_url = photos.url(filename)
+    else:
+        file_url = None
+    return render_template('upload.html', form=form, file_url=file_url)
 
 @app.route('/logout')
 def logout():
