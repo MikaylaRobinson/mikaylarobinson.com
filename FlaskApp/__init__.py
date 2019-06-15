@@ -245,6 +245,13 @@ def upload_file():
         file_url = None
     return render_template('admin_pages/upload.html', form=form, file_url=file_url)
 
+@app.route("/admin/view_images")
+@login_required
+def admin_view_images():
+    all_images = os.listdir(app.config['UPLOADED_PHOTOS_DEST'])
+    all_images = ['uploads/' + file for file in all_images]
+    return render_template("admin_pages/images_view.html", all_images=all_images)
+
 @app.route('/logout')
 def logout():
     logout_user()
