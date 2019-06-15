@@ -124,7 +124,6 @@ class NewSideProjectForm(FlaskForm):
     content = TextAreaField("Content", validators=[DataRequired()])
     submit = SubmitField("Register")
 
-
 if config.CREATE_DATABASE:
     print("Creating database")
     db.create_all()
@@ -199,7 +198,7 @@ def admin_blog_new_route():
     
     if form.validate_on_submit():
         url_slug = make_url_slug(form.title.data)
-        post = LearningTopics(date=datetime.now(), keyword=form.keyword.data, title=form.title.data , tools_used=form.tools_used.data, url_slug=url_slug, content=form.content.data, image_url=None)
+        post = LearningTopics(date=datetime.now(), keyword=form.keyword.data, title=form.title.data, tools_used=form.tools_used.data, url_slug=url_slug, content=form.content.data, image_url=None)
         db.session.add(post)
         db.session.commit()
         flash("Post Added")
