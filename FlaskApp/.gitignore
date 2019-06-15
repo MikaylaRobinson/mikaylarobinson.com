@@ -1,3 +1,4 @@
 .flaskenv
 config.py
 FlaskApp-env/
+static/uploads/

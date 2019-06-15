@@ -5,22 +5,35 @@ from datetime import datetime
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import current_user, login_user, LoginManager, UserMixin, logout_user, login_required
 from flask_sqlalchemy import SQLAlchemy
+from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_wtf import FlaskForm
 from site_utils import make_url_slug
 from sqlalchemy.sql import func
 from werkzeug.security import generate_password_hash, check_password_hash
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
+from forms import RegistrationForm, LoginForm, NewBlogForm, NewSideProjectForm
 
 app = Flask(__name__)
 
 # dotenv.load_dotenv(os.path.dirname(__file__), ".flaskenv")
 app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
 app.config["SECRET_KEY"] = config.SECRET_KEY
+app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(os.getcwd(), 'static', 'uploads')
 
 # Database configuration with SQLAlchemy
 db = SQLAlchemy(app)
 login = LoginManager(app)
+
+# Image upload form, needs app variable. 
+# TODO: Refactor file structure
+from flask_wtf.file import FileField, FileRequired, FileAllowed
+from wtforms import SubmitField
+photos = UploadSet('photos', IMAGES)
+configure_uploads(app, photos)
+patch_request_class(app)  # set maximum file size, default is 16MB
+
+class ImageUploadForm(FlaskForm):
+    photo = FileField(validators=[FileAllowed(photos, u'Image only!'), FileRequired(u'File was empty!')])
+    submit = SubmitField(u'Upload')
 
 class LearningTopics(db.Model):
     __tablename__ = "learning_topics"
@@ -84,46 +97,6 @@ class User(UserMixin, db.Model):
 
     def set_is_admin(self, is_admin):
         self.is_admin = is_admin
-
-class RegistrationForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired()])
-    email = StringField("Email", validators=[DataRequired(), Email()])
-    password = PasswordField("Password", validators=[DataRequired()])
-    password2 = PasswordField(
-        "Repeat Password", validators=[DataRequired(), EqualTo("password")])
-    secret_pass = PasswordField("Entry Code", validators=[DataRequired()])
-    submit = SubmitField("Register")
-
-    def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
-        if user is not None:
-            raise ValidationError("Please use a different username.")
-
-    def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
-        if user is not None:
-            raise ValidationError("Please use a different email address.")
-
-class LoginForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired()])
-    password = PasswordField("Password", validators=[DataRequired()])
-    remember_me = BooleanField("Remember Me")
-    submit = SubmitField("Sign In")
-
-class NewBlogForm(FlaskForm):
-    keyword = StringField("Keyword", validators=[DataRequired()])
-    title = StringField("Title", validators=[DataRequired()])
-    tools_used = StringField("Tools Used", validators=[DataRequired()])
-    content = TextAreaField("Content", validators=[DataRequired()])
-    submit = SubmitField("Register")
-
-class NewSideProjectForm(FlaskForm):
-    keyword = StringField("Keyword", validators=[DataRequired()])
-    title = StringField("Title", validators=[DataRequired()])
-    tools_used = StringField("Tools Used", validators=[DataRequired()])
-    content = TextAreaField("Content", validators=[DataRequired()])
-    submit = SubmitField("Register")
-
 
 if config.CREATE_DATABASE:
     print("Creating database")
@@ -199,7 +172,7 @@ def admin_blog_new_route():
     
     if form.validate_on_submit():
         url_slug = make_url_slug(form.title.data)
-        post = LearningTopics(date=datetime.now(), keyword=form.keyword.data, title=form.title.data , tools_used=form.tools_used.data, url_slug=url_slug, content=form.content.data, image_url=None)
+        post = LearningTopics(date=datetime.now(), keyword=form.keyword.data, title=form.title.data, tools_used=form.tools_used.data, url_slug=url_slug, content=form.content.data, image_url=None)
         db.session.add(post)
         db.session.commit()
         flash("Post Added")
@@ -260,6 +233,17 @@ def delete_project_post_route(id):
     db.session.delete(post)
     db.session.commit()
     return json.dumps({"status":"ok"})
+
+@app.route('/admin/image_upload', methods=['GET', 'POST'])
+@login_required
+def upload_file():
+    form = ImageUploadForm()
+    if form.validate_on_submit():
+        filename = photos.save(form.photo.data)
+        file_url = photos.url(filename)
+    else:
+        file_url = None
+    return render_template('upload.html', form=form, file_url=file_url)
 
 @app.route('/logout')
 def logout():

@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block additional_tags %}
+<link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/js/froala_editor.pkgd.min.js'></script>
+{% endblock %}
+
 {% block content %}
 <div class="width-80-center">
     <h1>New Side Project Post</h1>
@@ -36,4 +41,7 @@
         <p>{{ form.submit() }}</p>
     </form>
 </div>
+<script>
+    var editor = new FroalaEditor('#content')
+</script>
 {% endblock %}
