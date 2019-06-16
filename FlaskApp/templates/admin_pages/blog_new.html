@@ -1,8 +1,7 @@
 {% extends "base.html" %}\
 
 {% block additional_tags %}
-<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+<script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -41,4 +40,7 @@
         <p>{{ form.submit() }}</p>
     </form>
 </div>
+<script>
+        CKEDITOR.replace( 'content' );
+</script>
 {% endblock %}
