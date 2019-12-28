@@ -188,6 +188,29 @@ def delete_project_post_route(id):
     db.session.commit()
     return json.dumps({"status":"ok"})
 
+@app.route("/admin/blog/edit/<url_slug>")
+@login_required
+def edit_blog_post(url_slug):
+    post = LearningTopics.query.filter_by(url_slug=url_slug).first()
+    
+    if post is None:
+        return redirect(url_for(topics_page))
+    return render_template("admin_pages/blog_edit.html", post = post)
+
+@app.route("/admin/blog/edit/<url_slug>", methods=['POST'])
+@login_required
+def edit_blog_post_submit(url_slug):
+    post = LearningTopics.query.filter_by(url_slug=url_slug).first()
+    post.title = request.form.get('title')
+    post.keyword = request.form.get('keyword')
+    post.date = request.form.get('date')
+    post.tools_used = request.form.get('tools_used')
+    post.url_slug = request.form.get('url_slug')
+    post.content = request.form.get('content')
+    post.image_url = request.form.get('image_url')
+    db.session.commit()
+    return render_template("admin_pages/control_panel.html")
+
 @app.route('/admin/image_upload', methods=['GET', 'POST'])
 @login_required
 def upload_file():

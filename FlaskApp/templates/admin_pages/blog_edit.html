@@ -1,0 +1,42 @@
+{% extends "base.html" %}\
+
+{% block additional_tags %}
+<script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="width-80-center">
+    <h1>Edit Blog Post</h1>
+    <form method="POST">
+        <p>
+        Title:
+        <input type="text" name="title" value="{{post.title}}"/>
+        </p>
+        <p>
+        Keyword:
+        <input type="text" name="keyword" value="{{post.keyword}}"/>
+        </p>
+        <p>
+        Date:
+        <input type="text" name="date" value="{{post.date}}"/>
+        </p>
+        <p>
+        Tools Used:
+        <input type="text" name="tools_used" value="{{post.tools_used}}"/>
+        </p>
+        <p>
+        URL Slug:
+        <input type="text" name="url_slug" value="{{post.url_slug}}"/>
+        </p>
+        <p>
+        Content:
+        <input type="text" name="content" value="{{post.content}}"/>
+        </p>
+        <p>
+        Image URL:
+        <input type="text" name="image_url" value="{{post.image_url}}"/>
+        </p>
+        <input type="submit"/>
+    </form>
+</div>
+{% endblock %}
