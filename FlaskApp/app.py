@@ -4,7 +4,7 @@ import config
 import json
 import os
 from datetime import datetime
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_login import current_user, login_user, LoginManager, UserMixin, logout_user, login_required
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_wtf import FlaskForm
@@ -51,7 +51,22 @@ def about_page():
 
 @app.route("/blog")
 def topics_page():
-    return render_template("blog.html")
+    per_page = 5
+    page = request.args.get('page', 1, type=int)
+    posts = LearningTopics.query.order_by(LearningTopics.date.desc()).paginate(page, per_page, False)
+    next_url = url_for('topics_page', page=posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('topics_page', page=posts.prev_num) \
+        if posts.has_prev else None
+    return render_template("blog.html", posts = posts, next_url = next_url, prev_url = prev_url)
+
+@app.route('/blog/<url_slug>')
+def display_blog_post(url_slug):
+    post = LearningTopics.query.filter_by(url_slug=url_slug).first()
+    
+    if post is None:
+        return redirect(url_for(topics_page))
+    return render_template("post.html", post = post)
 
 @app.route("/side_projects")
 def projects_page():

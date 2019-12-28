@@ -180,57 +180,25 @@ h1 {
     margin: 0 4em 0 4em;
 }
 
-.blog_post {
-    text-align: left;
-    background-color: none;
-    padding-top: 6px;
-    margin-bottom: 2em;
-    text-align: left;
-    width: 60%;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    margin: 1em auto;
-    line-height: 1.4em;
-    height: auto;
-}
-
-.blog_post .col {
-    display: block;
-}
-
-.topics-divider {
-    height: 1px;
-    width: 20em;
-    border-bottom: 1px solid #00000040;
-    display: block;
-    margin: 1em auto;
-    padding: 1em 0em 1em 0em;
-}
-
-.title_and_description {
-   padding: 1em;
-   padding-bottom: 0;
-}
-
-.blog_post_photo img{
-    height: 200px;
-    margin-top: 20px;
-    margin: 0px auto;
-    display: block;
-}
-
-.read-more-button {
-    text-decoration: none;
-    color: rgb(61, 57, 58);
-    float: right;
-    margin-right: 2em;
-    font-size: 1.2em;
-    padding: 8px;
-    border: 1px solid #00000040;
-    border-radius: 100px;
-    &:hover {
-        border: 1px solid black;
+.blog-post-title {
+    a {
+        color: #222;
     }
+
+    margin-bottom: 3px;
+}
+
+.blog-post-date {
+    font-size: .8em;
+    margin-top: 0px;
+}
+.blog-post-tools {
+    background-color: #00bcd452;
+    display: inline-block;
+    padding: 0.6em;
+    border-radius: 1em;
+    font-size: .8em;
+    margin: 0px;
 }
 
 //Home Page
