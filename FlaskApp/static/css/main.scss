@@ -177,15 +177,38 @@ h1 {
 
 //LEARNING TOPICS PAGE//
 .blog {
-    margin: 0 4em 0 4em;
+    // margin: 0 4em 0 4em;
+    margin: 0px auto;
+    display: block;
+    width: 40%;
+}
+
+.blog-list-item {
+    // text-align: center;
+    background-color: #b9e6ec33;
+    padding: 1em;
+    margin-top: 1em;
 }
 
 .blog-post-title {
     a {
         color: #222;
+        font-size: 1.3em;
+        text-decoration: none;
+        &:hover {
+            color: #555;
+        }
     }
-
+    margin-top:0px;
     margin-bottom: 3px;
+}
+
+.blog-listing-page-nav {
+    color: #222;
+    text-decoration: none;
+    &:hover {
+        color: #555;
+    }
 }
 
 .blog-post-date {
@@ -193,9 +216,9 @@ h1 {
     margin-top: 0px;
 }
 .blog-post-tools {
-    background-color: #00bcd452;
+    background-color: #00bcd436;
     display: inline-block;
-    padding: 0.6em;
+    padding: .3em 1.3em;
     border-radius: 1em;
     font-size: .8em;
     margin: 0px;
