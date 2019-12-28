@@ -7,7 +7,7 @@
     {% for post in posts.items %}
     <div class="blog-list-item">
         <h4 class="blog-post-title"><a href="/blog/{{post.url_slug}}">{{post.title}}</a></h4>
-        <p class="blog-post-date">{{post.date.strftime('%m-%d-%Y')}}</p>
+        <p class="blog-post-date">{{post.date.strftime('%B %d, %Y')}}</p>
         <p class="blog-post-subtitle">{{post.keyword}}</p>
         <p class="blog-post-tools">{{post.tools_used}}</p>
     </div>

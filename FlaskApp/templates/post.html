@@ -7,7 +7,7 @@
     <p><a class="blog-listing-page-nav" href="/blog">Back to Posts</a></p>
     <div class="blog-post">
         <h4 class="blog-post-title"><a href="/blog/{{post.url_slug}}">{{post.title}}</a></h4>
-        <p class="blog-post-date">{{post.date.strftime('%m-%d-%Y')}}</p>
+        <p class="blog-post-date">{{post.date.strftime('%B %d, %Y')}}</p>
         <p class="blog=post-content">{{post.content|safe}}</p>
     </div>
 </section>
