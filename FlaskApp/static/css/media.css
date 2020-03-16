@@ -153,7 +153,9 @@ close the topnav (.icon) */
     padding-top: 1em; }
 
   .blog {
-    margin: 0 1em; }
+    margin: 0 1em;
+    margin-top: 100px;
+    width: 90%; }
 
   .title_and_description p {
     text-align: center; }
